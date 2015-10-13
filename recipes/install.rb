@@ -30,6 +30,7 @@ when 'ubuntu', 'debian'
   node['cassandra']['packages'].each do |install|
     package install do
       version node['cassandra']['dse_version']
+      timeout node['cassandra']['pkg-timeout']
       action :install
       options '-o Dpkg::Options::="--force-confold"'
     end
@@ -37,6 +38,7 @@ when 'ubuntu', 'debian'
 when 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
   package 'dse-full' do
     version node['cassandra']['dse_version']
+    timeout node['cassandra']['pkg-timeout']
     action :install
   end
 end
